@@ -1,17 +1,24 @@
-import p5 from "./src/p5js/p5";
+import p5 from "./src/p5js/p5.min";
 import Game from "./src/main/game";
 
 const s = (sketch) => {
+
+    let game;
+
     sketch.setup = () => {
         var canvas = sketch.createCanvas(800, 800);
         canvas.parent("gameArea");
 
-        sketch.game = new Game(800, 800);
+        game = new Game(sketch, 800, 800);
     };
 
     sketch.draw = () => {
         sketch.background(51);
-        sketch.game.draw(sketch);
+        game.draw();
+    };
+
+    sketch.mousePressed = () => {
+        game.clicked();
     };
 }
 

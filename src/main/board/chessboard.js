@@ -15,70 +15,89 @@ const LETTERS_CORRESPONDING = {
 
 export default class Chessboard {
 
-    constructor() {
+    constructor(p5) {
+        this.p5 = p5;
         this.squares = [];
     }
 
     setup() {
-        this.squares = createChessboardMatrix('black');
+        this.squares = this.createChessboardMatrix('black');
         console.log(this.squares);
     }
 
-    draw(p5) {
+    draw() {
         this.squares.forEach(boardRow => {
             boardRow.forEach(square => {
-                square.draw(p5);
+                square.draw();
             });
         });
     }
-}
 
-function createChessboardMatrix(orientation) {
-    let chessboard = [];
-
-    for (let row = 0; row < 8; row++) {
-        let line = []
-        for (let col = 0; col < 8; col++) {
-            let columnName = LETTERS_CORRESPONDING[col] + (row + 1);
-            let color = (row + col) % 2 == 0 ? BLACK : WHITE;
-
-            let rowIndex = row;
-            let colIndex = col;
-            if (orientation == 'white') {
-                rowIndex = 8 - 1 - row;    
-            } else {
-                colIndex = 8 - 1 - col;
-            }
-
-            line.push(new Square(columnName, rowIndex, colIndex, color));
-        }
-        chessboard.push(line);
+    clicked() {
+        // Ideia: fazer uma function que recebe uma function que a executa em cima dos Squares
+        this.squares.forEach(boardRow => {
+            boardRow.forEach(square => {
+                square.clicked();
+            });
+        });
     }
-    return chessboard;
+
+    createChessboardMatrix(orientation) {
+        let chessboard = [];
+    
+        for (let row = 0; row < 8; row++) {
+            let line = []
+            for (let col = 0; col < 8; col++) {
+                let columnName = LETTERS_CORRESPONDING[col] + (row + 1);
+                let color = (row + col) % 2 == 0 ? BLACK : WHITE;
+    
+                let rowIndex = row;
+                let colIndex = col;
+                if (orientation == 'white') {
+                    rowIndex = 8 - 1 - row;    
+                } else {
+                    colIndex = 8 - 1 - col;
+                }
+    
+                line.push(new Square(this.p5, columnName, rowIndex, colIndex, color));
+            }
+            chessboard.splice(0, 0, line);
+        }
+        return chessboard;
+    }
 }
 
 
 export class Square {
 
-    constructor(name, rowIndex, columnIndex, color) {
+    constructor(p5, name, rowIndex, columnIndex, color) {
+        this.p5 = p5;
         this.name = name;
         this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
         this.color = color;
+
+        this.squareSize = this.p5.width / 8;
+        this.x = this.columnIndex * this.squareSize;
+        this.y = this.rowIndex * this.squareSize;
+        this.x2 = this.x + this.squareSize;
+        this.y2 = this.y + this.squareSize;
     }
 
-    draw(p5) {
-        let squareSize = p5.width / 8;
-        
-        let x = this.columnIndex * squareSize;
-        let y = this.rowIndex * squareSize;
+    draw() {
+        this.p5.fill(this.color);
+        this.p5.square(this.x, this.y, this.squareSize);
 
-        p5.fill(this.color);
-        p5.square(x, y, squareSize);
+        this.p5.fill(153);
+        this.p5.textSize(18);
+        this.p5.text(this.name, this.x, this.y, this.squareSize, this.squareSize);
+    }
 
-        p5.fill(153);
-        p5.textSize(18);
-        p5.text(this.name, x, y, squareSize, squareSize);
+    clicked() { 
+        let isOverSquare = this.p5.mouseX > this.x && this.p5.mouseX < this.x2 && this.p5.mouseY > this.y && this.p5.mouseY < this.y2;
+        if (isOverSquare) {
+            console.log(this.name);
+        }
     }
 }
 
