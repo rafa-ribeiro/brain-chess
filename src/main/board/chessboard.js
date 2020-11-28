@@ -20,7 +20,7 @@ export default class Chessboard {
     }
 
     setup() {
-        this.squares = crateChessboardMatrix();
+        this.squares = createChessboardMatrix('black');
         console.log(this.squares);
     }
 
@@ -31,10 +31,9 @@ export default class Chessboard {
             });
         });
     }
-
 }
 
-function crateChessboardMatrix() {
+function createChessboardMatrix(orientation) {
     let chessboard = [];
 
     for (let row = 0; row < 8; row++) {
@@ -43,14 +42,21 @@ function crateChessboardMatrix() {
             let columnName = LETTERS_CORRESPONDING[col] + (row + 1);
             let color = (row + col) % 2 == 0 ? BLACK : WHITE;
 
-            let rowIndex = 8 - 1 - row;
-            line.push(new Square(columnName, rowIndex, col, color));
+            let rowIndex = row;
+            let colIndex = col;
+            if (orientation == 'white') {
+                rowIndex = 8 - 1 - row;    
+            } else {
+                colIndex = 8 - 1 - col;
+            }
+
+            line.push(new Square(columnName, rowIndex, colIndex, color));
         }
         chessboard.push(line);
     }
-
     return chessboard;
 }
+
 
 export class Square {
 
