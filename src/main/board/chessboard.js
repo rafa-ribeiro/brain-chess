@@ -34,7 +34,6 @@ export default class Chessboard {
     }
 
     clicked() {
-        // Ideia: fazer uma function que recebe uma function que a executa em cima dos Squares
         this.squares.forEach(boardRow => {
             boardRow.forEach(square => {
                 square.clicked();
