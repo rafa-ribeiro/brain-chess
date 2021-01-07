@@ -1,4 +1,4 @@
-import Chessboard from './board/chessboard';
+import Chessboard from './chess/chessboard';
 
 export default class Game {
 
