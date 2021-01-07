@@ -12,5 +12,4 @@ function gameLoop(timestamp) {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
 
-    
 }

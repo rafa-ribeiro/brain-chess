@@ -2,7 +2,7 @@
 const BLACK = 0;
 const WHITE = 255;
 
-const LETTERS_CORRESPONDING = {
+const CORRESPONDING_LETTERS = {
     0: 'a',
     1: 'b',
     2: 'c',
@@ -21,7 +21,7 @@ export default class Chessboard {
     }
 
     setup() {
-        this.squares = this.createChessboardMatrix('black');
+        this.squares = this.createChessboardMatrix('white');
         console.log(this.squares);
     }
 
@@ -48,7 +48,7 @@ export default class Chessboard {
         for (let row = 0; row < 8; row++) {
             let line = []
             for (let col = 0; col < 8; col++) {
-                let columnName = LETTERS_CORRESPONDING[col] + (row + 1);
+                let columnName = CORRESPONDING_LETTERS[col] + (row + 1);
                 let color = (row + col) % 2 == 0 ? BLACK : WHITE;
     
                 let rowIndex = row;
