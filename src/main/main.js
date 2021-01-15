@@ -3,15 +3,21 @@
 var objLayer;
 var player;
 
+var game;
+
+var blackQueen;
+
 
 function setup() {
     var canvas = createCanvas(800, 800);
     canvas.parent("gameArea");
 
-    // game = new Game(sketch, 800, 800);
+    // objLayer = new ObjectLayer();
+    // player = new Player(objLayer, "MoveState");
 
-    objLayer = new ObjectLayer();
-    player = new Player(objLayer, "MoveState");
+    game = new Game(800, 800);
+
+    blackQueen = new Piece('Black Queen', blackQueenImg);
 }
 
 function draw() {
@@ -26,7 +32,7 @@ function draw() {
 
 // User defined functions
 function StaticRender() {
-    background(0);
+    game.draw();
 }
 
 function FixedUpdate() {
@@ -34,7 +40,7 @@ function FixedUpdate() {
 }
 
 function Update() {
-    objLayer.Update();
+    // objLayer.Update();
 }
 
 function LatedUpdate() {
@@ -42,5 +48,20 @@ function LatedUpdate() {
 }
 
 function Render() {
-    objLayer.Draw();
+    // objLayer.Draw();
+
+    blackQueen.draw();
+}
+
+function mousePressed() {
+    game.clicked();
+    blackQueen.onPressed();
+}
+
+function mouseDragged() {
+    blackQueen.onDragged();
+}
+
+function mouseReleased() {
+    blackQueen.onReleased();
 }

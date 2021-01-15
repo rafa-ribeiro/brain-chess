@@ -1,6 +1,9 @@
 
-const BLACK = 0;
-const WHITE = 255;
+const BLACK = function () { fill(118,150,86) };
+const WHITE = function() { fill(238,238,210) };
+
+// const BLACK = function () { fill(125, 135, 150) };
+// const WHITE = function() { fill(232, 235, 239) };
 
 const CORRESPONDING_LETTERS = {
     0: 'a',
@@ -13,10 +16,9 @@ const CORRESPONDING_LETTERS = {
     7: 'h'
 }
 
-export default class Chessboard {
+class Chessboard {
 
-    constructor(p5) {
-        this.p5 = p5;
+    constructor() {
         this.squares = [];
     }
 
@@ -43,22 +45,22 @@ export default class Chessboard {
 
     createChessboardMatrix(orientation) {
         let chessboard = [];
-    
+
         for (let row = 0; row < 8; row++) {
             let line = []
             for (let col = 0; col < 8; col++) {
                 let columnName = CORRESPONDING_LETTERS[col] + (row + 1);
                 let color = (row + col) % 2 == 0 ? BLACK : WHITE;
-    
+
                 let rowIndex = row;
                 let colIndex = col;
                 if (orientation == 'white') {
-                    rowIndex = 8 - 1 - row;    
+                    rowIndex = 8 - 1 - row;
                 } else {
                     colIndex = 8 - 1 - col;
                 }
-    
-                line.push(new Square(this.p5, columnName, rowIndex, colIndex, color));
+
+                line.push(new Square(columnName, rowIndex, colIndex, color));
             }
             chessboard.splice(0, 0, line);
         }
@@ -67,16 +69,17 @@ export default class Chessboard {
 }
 
 
-export class Square {
+class Square {
 
-    constructor(p5, name, rowIndex, columnIndex, color) {
-        this.p5 = p5;
+    constructor(name, rowIndex, columnIndex, color) {
         this.name = name;
         this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
         this.color = color;
 
-        this.squareSize = this.p5.width / 8;
+        // this.squareSize = this.p5.width / 8;
+        this.squareSize = width / 8;
+
         this.x = this.columnIndex * this.squareSize;
         this.y = this.rowIndex * this.squareSize;
         this.x2 = this.x + this.squareSize;
@@ -84,22 +87,21 @@ export class Square {
     }
 
     draw() {
-        this.p5.fill(this.color);
-        this.p5.square(this.x, this.y, this.squareSize);
+        // fill(this.color);
+        noStroke();
+        this.color();
+        square(this.x, this.y, this.squareSize);
 
-        this.p5.fill(153);
-        this.p5.textSize(18);
-        this.p5.text(this.name, this.x, this.y, this.squareSize, this.squareSize);
+        fill(0);
+        textSize(18);
+        text(this.name, this.x, this.y, this.squareSize, this.squareSize);
     }
 
-    clicked() { 
-        let isOverSquare = this.p5.mouseX > this.x && this.p5.mouseX < this.x2 && this.p5.mouseY > this.y && this.p5.mouseY < this.y2;
+    clicked() {
+        let isOverSquare = mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
         if (isOverSquare) {
             console.log(this.name);
         }
     }
-}
 
-Square.prototype.toString = function() {
-    return this.name;
 }

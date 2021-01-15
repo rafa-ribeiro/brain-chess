@@ -1,12 +1,11 @@
-import Chessboard from './chess/chessboard';
+// import Chessboard from './chess/chessboard';
 
-export default class Game {
+class Game {
 
-    constructor(p5, width, height) {
-        this.p5 = p5;
+    constructor(width, height) {
         this.width = width;
         this.height = height;
-        this.chessboard = new Chessboard(this.p5);
+        this.chessboard = new Chessboard();
         this.chessboard.setup();
     }
 
@@ -19,7 +18,7 @@ export default class Game {
     }
 
     clicked() {
-        let isOverChessboard = this.p5.mouseX > 0 && this.p5.mouseX < this.width && this.p5.mouseY > 0 && this.p5.mouseY < this.height;
+        let isOverChessboard = mouseX > 0 && mouseX < this.width && mouseY > 0 && mouseY < this.height;
 
         if (isOverChessboard) {
             this.chessboard.clicked();
