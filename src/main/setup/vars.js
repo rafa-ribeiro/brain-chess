@@ -1,3 +1,4 @@
 
+let PIECES = [];
 
 let blackQueenImg;

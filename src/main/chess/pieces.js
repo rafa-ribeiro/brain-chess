@@ -6,16 +6,14 @@ class Piece {
     constructor(name, imgPiece) {
         this.name = name;
         this.imgPiece = imgPiece;
-        this.imgSize = 60;
+        this.imgSize = 70;
         this.posX = 110;
         this.posY = 110;
         this.locked = false;
     }
 
     draw() {
-
         image(this.imgPiece, this.posX, this.posY, this.imgSize, this.imgSize);
-
     }
 
     isOver() {
