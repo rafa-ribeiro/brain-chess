@@ -1,15 +1,17 @@
-let xOffset = 0.0;
-let yOffset = 0.0;
 
 class Piece {
 
-    constructor(name, imgPiece) {
+    constructor(name, imgPiece, square) {
         this.name = name;
         this.imgPiece = imgPiece;
-        this.imgSize = 70;
-        this.posX = 110;
-        this.posY = 110;
+        this.square = square;
+        this.imgSize = this.square.dimension;
+        this.posX = this.square.x;
+        this.posY = this.square.y;
         this.locked = false;
+
+        this.xOffset = 0.0;
+        this.yOffset = 0.0;
     }
 
     draw() {
@@ -28,19 +30,18 @@ class Piece {
     onPressed() {
         if (this.isOver()) {
             this.locked = true;
-            console.log("Cliquei na Dama");
+            console.log("piece: " + this.name);
         } else {
             this.locked = false;
-            console.log("Clique noutro lugar");
         }
-        xOffset = mouseX - this.posX;
-        yOffset = mouseY - this.posY;
+        this.xOffset = mouseX - this.posX;
+        this.yOffset = mouseY - this.posY;
     }
 
     onDragged() {
         if (this.locked) {
-            this.posX = mouseX - xOffset;
-            this.posY = mouseY - yOffset; 
+            this.posX = mouseX - this.xOffset;
+            this.posY = mouseY - this.yOffset; 
         }
     }
 
@@ -48,4 +49,3 @@ class Piece {
         this.locked = false;
     }
 }
-

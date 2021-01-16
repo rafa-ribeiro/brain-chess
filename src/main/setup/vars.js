@@ -1,4 +1,2 @@
 
-let PIECES = [];
-
-let blackQueenImg;
+let PIECES_IMG = [];

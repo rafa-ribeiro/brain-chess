@@ -5,24 +5,48 @@ class Game {
     constructor(width, height) {
         this.width = width;
         this.height = height;
+        
         this.chessboard = new Chessboard();
-        this.chessboard.setup();
+        this.playablePieces = BoardMounter.mount(this.chessboard);
     }
 
     setup() {
 
     }
 
-    draw() {
+    drawChessboard() {
         this.chessboard.draw();
     }
 
-    clicked() {
+    drawPieces() {
+        this.playablePieces.forEach(piece => {
+            piece.draw();
+        });
+    }
+
+    onPressed() {
         let isOverChessboard = mouseX > 0 && mouseX < this.width && mouseY > 0 && mouseY < this.height;
 
         if (isOverChessboard) {
-            this.chessboard.clicked();
+            this.chessboard.onPressed();
+
+            this.playablePieces.forEach(piece => {
+                piece.onPressed();
+            });
+
         }
+    }
+
+    onDragged() {
+        this.playablePieces.forEach(piece => {
+            piece.onDragged();
+        });
+    }
+
+    onReleased() {
+        this.playablePieces.forEach(piece => {
+            piece.onReleased();
+        });
     }
 
 }

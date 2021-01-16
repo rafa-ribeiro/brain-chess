@@ -1,9 +1,9 @@
 
-const BLACK = function () { fill(118, 150, 86) };
-const WHITE = function () { fill(238, 238, 210) };
+const DARK = function () { fill(118, 150, 86) };
+const LIGHT = function () { fill(238, 238, 210) };
 
-// const BLACK = function () { fill(125, 135, 150) };
-// const WHITE = function() { fill(232, 235, 239) };
+// const DARK = function () { fill(125, 135, 150) };
+// const LIGHT = function() { fill(232, 235, 239) };
 
 const CORRESPONDING_LETTERS = {
     0: 'a',
@@ -19,10 +19,6 @@ const CORRESPONDING_LETTERS = {
 class Chessboard {
 
     constructor() {
-        this.squares = [];
-    }
-
-    setup() {
         this.squares = this.createChessboardMatrix('white');
         console.log(this.squares);
     }
@@ -35,10 +31,10 @@ class Chessboard {
         });
     }
 
-    clicked() {
+    onPressed() {
         this.squares.forEach(boardRow => {
             boardRow.forEach(square => {
-                square.clicked();
+                square.onPressed();
             });
         });
     }
@@ -50,7 +46,7 @@ class Chessboard {
             let line = []
             for (let col = 0; col < 8; col++) {
                 let columnName = CORRESPONDING_LETTERS[col] + (row + 1);
-                let color = (row + col) % 2 == 0 ? BLACK : WHITE;
+                let color = (row + col) % 2 == 0 ? DARK : LIGHT;
 
                 let rowIndex = row;
                 let colIndex = col;
@@ -76,31 +72,28 @@ class Square {
         this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
         this.color = color;
+        // width é variável do p5js
+        this.dimension = width / 8;
 
-        // this.squareSize = this.p5.width / 8;
-        this.squareSize = width / 8;
-
-        this.x = this.columnIndex * this.squareSize;
-        this.y = this.rowIndex * this.squareSize;
-        this.x2 = this.x + this.squareSize;
-        this.y2 = this.y + this.squareSize;
+        this.x = this.columnIndex * this.dimension;
+        this.y = this.rowIndex * this.dimension;
+        this.x2 = this.x + this.dimension;
+        this.y2 = this.y + this.dimension;
     }
 
     draw() {
-        // fill(this.color);
         noStroke();
         this.color();
-        square(this.x, this.y, this.squareSize);
+        square(this.x, this.y, this.dimension);
 
         if (this.columnIndex == 0 || this.rowIndex == 7) {
             fill(0);
             textSize(18);
-            text(this.name, this.x, this.y, this.squareSize, this.squareSize);
+            text(this.name, this.x, this.y, this.dimension, this.dimension);
         }
-
     }
 
-    clicked() {
+    onPressed() {
         let isOverSquare = mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
         if (isOverSquare) {
             console.log(this.name);

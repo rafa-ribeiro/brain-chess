@@ -5,8 +5,6 @@ var player;
 
 var game;
 
-var blackQueen;
-
 var WIDTH = 600;
 var HEIGHT = 600;
 
@@ -20,7 +18,7 @@ function setup() {
 
     game = new Game(WIDTH, HEIGHT);
 
-    blackQueen = new Piece('Black Queen', blackQueenImg);
+    // blackQueen = new Piece('Black Queen', blackQueenImg);
 }
 
 function draw() {
@@ -35,7 +33,7 @@ function draw() {
 
 // User defined functions
 function StaticRender() {
-    game.draw();
+    game.drawChessboard();
 }
 
 function FixedUpdate() {
@@ -53,18 +51,17 @@ function LatedUpdate() {
 function Render() {
     // objLayer.Draw();
 
-    blackQueen.draw();
+    game.drawPieces();
 }
 
 function mousePressed() {
-    game.clicked();
-    blackQueen.onPressed();
+    game.onPressed();
 }
 
 function mouseDragged() {
-    blackQueen.onDragged();
+    game.onDragged();
 }
 
 function mouseReleased() {
-    blackQueen.onReleased();
+    game.onReleased();
 }
