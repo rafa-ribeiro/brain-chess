@@ -6,7 +6,7 @@ class Piece {
     constructor(name, imgPiece) {
         this.name = name;
         this.imgPiece = imgPiece;
-        this.imgSize = 80;
+        this.imgSize = 75;
         this.posX = 110;
         this.posY = 110;
         this.locked = false;

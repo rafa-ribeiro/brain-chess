@@ -1,6 +1,6 @@
 
-const BLACK = function () { fill(118,150,86) };
-const WHITE = function() { fill(238,238,210) };
+const BLACK = function () { fill(118, 150, 86) };
+const WHITE = function () { fill(238, 238, 210) };
 
 // const BLACK = function () { fill(125, 135, 150) };
 // const WHITE = function() { fill(232, 235, 239) };
@@ -92,9 +92,12 @@ class Square {
         this.color();
         square(this.x, this.y, this.squareSize);
 
-        fill(0);
-        textSize(18);
-        text(this.name, this.x, this.y, this.squareSize, this.squareSize);
+        if (this.columnIndex == 0 || this.rowIndex == 7) {
+            fill(0);
+            textSize(18);
+            text(this.name, this.x, this.y, this.squareSize, this.squareSize);
+        }
+
     }
 
     clicked() {

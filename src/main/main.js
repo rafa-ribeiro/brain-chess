@@ -7,15 +7,18 @@ var game;
 
 var blackQueen;
 
+var WIDTH = 600;
+var HEIGHT = 600;
+
 
 function setup() {
-    var canvas = createCanvas(800, 800);
+    var canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent("gameArea");
 
     // objLayer = new ObjectLayer();
     // player = new Player(objLayer, "MoveState");
 
-    game = new Game(800, 800);
+    game = new Game(WIDTH, HEIGHT);
 
     blackQueen = new Piece('Black Queen', blackQueenImg);
 }
