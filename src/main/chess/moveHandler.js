@@ -20,6 +20,8 @@ class MoveHandler {
             } else {
                 this.selectedPiece.moveTo(targetSquare);
             }
+        } else {
+            this.selectedPiece.resetPosition();
         }
     }
 
