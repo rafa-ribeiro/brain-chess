@@ -39,6 +39,14 @@ class Chessboard {
         });
     }
 
+    onReleased() {
+        this.squares.forEach(boardRow => {
+            boardRow.forEach(square => {
+                square.onReleased();
+            });
+        });
+    }
+
     createChessboardMatrix(orientation) {
         let chessboard = [];
 
@@ -94,10 +102,19 @@ class Square {
     }
 
     onPressed() {
-        let isOverSquare = mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
-        if (isOverSquare) {
+        if (this.isOverSquare()) {
             console.log(this.name);
         }
+    }
+
+    onReleased() {
+        if (this.isOverSquare()) {
+            console.log('soltei em ' + this.name);
+        }
+    }
+
+    isOverSquare() {
+        return mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
     }
 
 }

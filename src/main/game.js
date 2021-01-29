@@ -44,6 +44,8 @@ class Game {
     }
 
     onReleased() {
+        this.chessboard.onReleased();
+
         this.playablePieces.forEach(piece => {
             piece.onReleased();
         });
