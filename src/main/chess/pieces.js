@@ -6,12 +6,18 @@ class Piece {
         this.imgPiece = imgPiece;
         this.square = square;
         this.imgSize = this.square.dimension;
+
+        this.initialPosX = this.square.x;
+        this.initialPosY = this.square.y;
+
         this.posX = this.square.x;
         this.posY = this.square.y;
         this.locked = false;
 
         this.xOffset = 0.0;
         this.yOffset = 0.0;
+
+        this.square.piece = this;
     }
 
     draw() {
@@ -47,5 +53,26 @@ class Piece {
 
     onReleased() {
         this.locked = false;
+    }
+
+    moveTo(targetSquare) {
+        this.clearSquare();
+
+        this.square = targetSquare;
+        this.initialPosX = this.square.x;
+        this.initialPosY = this.square.y;
+        this.posX = this.square.x;
+        this.posY = this.square.y;
+
+        this.square.piece = this;
+    }
+
+    clearSquare() {
+        this.square.piece = null;
+    }
+
+    resetPosition() {
+        this.posX = this.initialPosX;
+        this.posY = this.initialPosY;
     }
 }

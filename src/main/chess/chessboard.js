@@ -20,29 +20,26 @@ class Chessboard {
 
     constructor() {
         this.squares = this.createChessboardMatrix('white');
+        this.squaresList = this._setSquaresList();
         console.log(this.squares);
+    }
+
+    _setSquaresList() {
+        let sqList = [];
+
+        this.squares.forEach(boardRow => {
+            boardRow.forEach(square => {
+                sqList.push(square);
+            });
+        });
+
+        return sqList;
     }
 
     draw() {
         this.squares.forEach(boardRow => {
             boardRow.forEach(square => {
                 square.draw();
-            });
-        });
-    }
-
-    onPressed() {
-        this.squares.forEach(boardRow => {
-            boardRow.forEach(square => {
-                square.onPressed();
-            });
-        });
-    }
-
-    onReleased() {
-        this.squares.forEach(boardRow => {
-            boardRow.forEach(square => {
-                square.onReleased();
             });
         });
     }
@@ -87,6 +84,8 @@ class Square {
         this.y = this.rowIndex * this.dimension;
         this.x2 = this.x + this.dimension;
         this.y2 = this.y + this.dimension;
+        
+        this.piece = null;
     }
 
     draw() {
@@ -98,18 +97,6 @@ class Square {
             fill(0);
             textSize(18);
             text(this.name, this.x, this.y, this.dimension, this.dimension);
-        }
-    }
-
-    onPressed() {
-        if (this.isOverSquare()) {
-            console.log(this.name);
-        }
-    }
-
-    onReleased() {
-        if (this.isOverSquare()) {
-            console.log('soltei em ' + this.name);
         }
     }
 
