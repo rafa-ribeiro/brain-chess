@@ -9,23 +9,49 @@ class MoveHandler {
         this.selectedPiece = null;
     }
 
-    onReleased() {
-        let targetSquare = this._getTargetSquare();
-        console.log(targetSquare);
-        console.log(this.selectedPiece);
-
-        if (targetSquare && this.selectedPiece) {
-            if (targetSquare.piece) {
-                this.selectedPiece.resetPosition();
-            } else {
-                this.selectedPiece.moveTo(targetSquare);
-            }
+    onPressed() {
+        if (this.selectedPiece == null) {
+            this._setSelectedPiece();
         } else {
-            this.selectedPiece.resetPosition();
+            if (this._isChangingSelectedPiece()) {
+                this._setSelectedPiece();
+            } else {
+                this._releaseSelectedPiece();
+            }
         }
     }
 
-    onPressed() {
+    _isChangingSelectedPiece() {
+        let targetSquare = this._getTargetSquare();
+        return this.selectedPiece != null && targetSquare.piece != null;
+    }
+
+    _movePieceTo(piece, targetSquare) {
+        piece.moveTo(targetSquare);
+        this.selectedPiece = null;
+    }
+
+    onReleased() {
+        this._releaseSelectedPiece();
+    }
+
+    _releaseSelectedPiece() {
+        let targetSquare = this._getTargetSquare();
+
+        if (this.selectedPiece) {
+            if (targetSquare) {
+                if (targetSquare.piece) {
+                    this.selectedPiece.resetPosition();
+                } else {
+                    this._movePieceTo(this.selectedPiece, targetSquare);
+                }
+            } else {
+                this.selectedPiece.resetPosition();
+            }
+        }
+    }
+
+    _setSelectedPiece() {
         let selectedPiece = null;
         let size = this.pieces.length;
         let idx = 0;
