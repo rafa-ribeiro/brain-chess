@@ -21,7 +21,7 @@ class Chessboard {
     constructor() {
         this.squares = this.createChessboardMatrix('white');
         this.squaresList = this._setSquaresList();
-        console.log(this.squares);
+        // console.log(this.squares);
     }
 
     _setSquaresList() {

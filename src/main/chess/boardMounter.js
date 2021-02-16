@@ -1,5 +1,4 @@
 
-
 PIECES_WHITE_ORIENTATION = [
     ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
     ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
@@ -26,14 +25,17 @@ class BoardMounter {
                 let pieceId = boardTemplate[rowIdx][colIdx];
                 let pieceImg = PIECES_IMG[pieceId];
                 if (pieceImg) {
-                    let piece = new Piece(pieceId, pieceImg, square);
+                    let team = _getTeam(pieceId);
+
+                    let piece = new Piece(pieceId, pieceImg, square, team);
                     pieces.push(piece);
                 }
             });
         });
-
-        console.log(pieces);
-
         return pieces;
     }
+}
+
+function _getTeam(pieceId) {
+    return pieceId[0] == 'w' ? teams.WHITE : teams.BLACK;
 }

@@ -1,7 +1,7 @@
 
 class Piece {
 
-    constructor(name, imgPiece, square) {
+    constructor(name, imgPiece, square, team) {
         this.name = name;
         this.imgPiece = imgPiece;
         this.square = square;
@@ -17,6 +17,7 @@ class Piece {
         this.xOffset = 0.0;
         this.yOffset = 0.0;
 
+        this.team = team;
         this.square.piece = this;
     }
 
@@ -36,7 +37,6 @@ class Piece {
     onPressed() {
         if (this.isOver()) {
             this.locked = true;
-            console.log("piece: " + this.name);
         } else {
             this.locked = false;
         }
