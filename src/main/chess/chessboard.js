@@ -72,11 +72,11 @@ class Chessboard {
 
 class Square {
 
-    constructor(name, rowIndex, columnIndex, color) {
+    constructor(name, rowIndex, columnIndex, functionToColor) {
         this.name = name;
         this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
-        this.color = color;
+        this.functionToColor = functionToColor;
         // width é variável do p5js
         this.dimension = width / 8;
 
@@ -86,11 +86,12 @@ class Square {
         this.y2 = this.y + this.dimension;
         
         this.piece = null;
+        this.isSelected = false;
     }
 
     draw() {
         noStroke();
-        this.color();
+        this.functionToColor();
         square(this.x, this.y, this.dimension);
 
         if (this.columnIndex == 0 || this.rowIndex == 7) {
@@ -98,6 +99,20 @@ class Square {
             textSize(18);
             text(this.name, this.x, this.y, this.dimension, this.dimension);
         }
+
+        if (this.isSelected) {
+            this.activate();
+        }
+    }
+
+    setSelect(isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    activate() {
+        noStroke();
+        fill(255, 191, 0, 127);
+        square(this.x, this.y, this.dimension);
     }
 
     isOverSquare() {

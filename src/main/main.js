@@ -41,7 +41,8 @@ function FixedUpdate() {
 }
 
 function Update() {
-    // objLayer.Update();
+    // ilumina o square conforme movimento do mouse
+    game.updateActiveSquare();
 }
 
 function LatedUpdate() {

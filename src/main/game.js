@@ -25,6 +25,13 @@ class Game {
         });
     }
 
+    updateActiveSquare() {
+        let targetSquare = this.moveHandler.getTargetSquare();
+        if (targetSquare) {
+            targetSquare.activate();
+        }
+    }
+
     onPressed() {
         let isOverChessboard = mouseX > 0 && mouseX < this.width && mouseY > 0 && mouseY < this.height;
 

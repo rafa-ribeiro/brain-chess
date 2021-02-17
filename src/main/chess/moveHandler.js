@@ -10,7 +10,19 @@ class MoveHandler {
     }
 
     onPressed() {
-        if (this.selectedPiece == null) {
+        this.handleSelectedPiece();
+        this.handleSelectedSquare(); 
+    }
+
+    handleSelectedSquare() {
+        let targetSquare = this.getTargetSquare();
+        if (targetSquare) {
+            targetSquare.setSelect(true);
+        }
+    }
+
+    handleSelectedPiece() {
+        if (!this.hasSelectedPiece()) {
             this._setSelectedPiece();
         } else {
             if (this._isChangingSelectedPiece()) {
@@ -21,8 +33,12 @@ class MoveHandler {
         }
     }
 
+    hasSelectedPiece() {
+        return this.selectedPiece !== null;
+    }
+
     _isChangingSelectedPiece() {
-        let targetSquare = this._getTargetSquare();
+        let targetSquare = this.getTargetSquare();
         return this.selectedPiece != null && targetSquare.piece != null;
     }
 
@@ -36,7 +52,7 @@ class MoveHandler {
     }
 
     _releaseSelectedPiece() {
-        let targetSquare = this._getTargetSquare();
+        let targetSquare = this.getTargetSquare();
 
         if (this.selectedPiece) {
             if (targetSquare) {
@@ -66,7 +82,7 @@ class MoveHandler {
         this.selectedPiece = selectedPiece;
     }
 
-    _getTargetSquare() {
+    getTargetSquare() {
         let targetSquare = null;
 
         let squaresList = this.chessboard.squaresList;
