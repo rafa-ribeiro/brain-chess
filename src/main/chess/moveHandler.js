@@ -15,16 +15,17 @@ class MoveHandler {
 
     handleSelectedSquare() {
         let targetSquare = this.getTargetSquare();
-        if (targetSquare && this.hasSelectedPiece()) {
+        if (targetSquare && this.hasValidPiece()) {
             targetSquare.setSelect(true);
         }
     }
 
     handleSelectedPiece() {
-        if (!this.hasSelectedPiece()) {
+        if (!this.hasValidPiece()) {
             this._setSelectedPiece();
         } else {
             if (this._isChangingSelectedPiece()) {
+                this._unmarkSquare(this.selectedPiece.square);
                 this._setSelectedPiece();
             } else {
                 this._releaseSelectedPiece();
@@ -32,7 +33,7 @@ class MoveHandler {
         }
     }
 
-    hasSelectedPiece() {
+    hasValidPiece() {
         return this.selectedPiece !== null && this.selectedPiece.team == CURRENT_TURN.team;
     }
 
@@ -52,10 +53,19 @@ class MoveHandler {
     _markLastMove(sourceSquare, targetSquare) {
         let squares = this.chessboard.squaresList;
         squares.forEach(square => {
-            square.setSelect(false);
+            this._unmarkSquare(square);
         });
-        sourceSquare.setSelect(true);
-        targetSquare.setSelect(true);
+
+        this._markSquare(sourceSquare);
+        this._markSquare(targetSquare);
+    }
+
+    _unmarkSquare(square) {
+        square.setSelect(false);
+    }
+
+    _markSquare(square) {
+        square.setSelect(true);
     }
 
     onReleased() {
@@ -65,7 +75,7 @@ class MoveHandler {
     _releaseSelectedPiece() {
         let targetSquare = this.getTargetSquare();
 
-        if (this.hasSelectedPiece()) {
+        if (this.hasValidPiece()) {
             if (targetSquare) {
                 if (targetSquare.piece) {
                     this.selectedPiece.resetPosition();
