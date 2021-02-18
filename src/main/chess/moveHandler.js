@@ -65,7 +65,7 @@ class MoveHandler {
     _releaseSelectedPiece() {
         let targetSquare = this.getTargetSquare();
 
-        if (this.selectedPiece) {
+        if (this.hasSelectedPiece()) {
             if (targetSquare) {
                 if (targetSquare.piece) {
                     this.selectedPiece.resetPosition();
@@ -75,6 +75,8 @@ class MoveHandler {
             } else {
                 this.selectedPiece.resetPosition();
             }
+        } else if (this.selectedPiece) {
+            this.selectedPiece.resetPosition();
         }
     }
 
