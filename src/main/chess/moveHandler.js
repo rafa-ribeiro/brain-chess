@@ -42,10 +42,20 @@ class MoveHandler {
     }
 
     _movePieceTo(piece, targetSquare) {
+        let sourceSquare = piece.square;
         piece.moveTo(targetSquare);
-        targetSquare.setSelect(true);
+        this._markLastMove(sourceSquare, targetSquare);
         this.selectedPiece = null;
         CURRENT_TURN.next();
+    }
+
+    _markLastMove(sourceSquare, targetSquare) {
+        let squares = this.chessboard.squaresList;
+        squares.forEach(square => {
+            square.setSelect(false);
+        });
+        sourceSquare.setSelect(true);
+        targetSquare.setSelect(true);
     }
 
     onReleased() {
