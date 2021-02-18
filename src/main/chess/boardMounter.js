@@ -10,8 +10,18 @@ PIECES_WHITE_ORIENTATION = [
     ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
 ];
 
-var boardTemplate = PIECES_WHITE_ORIENTATION;
+PIECES_BLACK_ORIENTATION = [
+    ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR'],
+    ['wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP'],
+    ['__', '__', '__', '__', '__', '__', '__', '__'],
+    ['__', '__', '__', '__', '__', '__', '__', '__'],
+    ['__', '__', '__', '__', '__', '__', '__', '__'],
+    ['__', '__', '__', '__', '__', '__', '__', '__'],
+    ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
+    ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR']
+];
 
+var boardTemplate = GAME_ORIENTATION == teams.WHITE ? PIECES_WHITE_ORIENTATION : PIECES_BLACK_ORIENTATION;
 class BoardMounter {
 
     static mount(chessboard) {

@@ -19,9 +19,8 @@ const CORRESPONDING_LETTERS = {
 class Chessboard {
 
     constructor() {
-        this.squares = this.createChessboardMatrix('white');
+        this.squares = this.createChessboardMatrix();
         this.squaresList = this._setSquaresList();
-        // console.log(this.squares);
     }
 
     _setSquaresList() {
@@ -44,7 +43,7 @@ class Chessboard {
         });
     }
 
-    createChessboardMatrix(orientation) {
+    createChessboardMatrix() {
         let chessboard = [];
 
         for (let row = 0; row < 8; row++) {
@@ -55,7 +54,7 @@ class Chessboard {
 
                 let rowIndex = row;
                 let colIndex = col;
-                if (orientation == 'white') {
+                if (GAME_ORIENTATION == teams.WHITE) {
                     rowIndex = 8 - 1 - row;
                 } else {
                     colIndex = 8 - 1 - col;
