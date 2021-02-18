@@ -1,6 +1,5 @@
 
 
-
 class MoveHandler {
 
     constructor(chessboard, pieces) {
@@ -11,7 +10,7 @@ class MoveHandler {
 
     onPressed() {
         this.handleSelectedPiece();
-        this.handleSelectedSquare(); 
+        this.handleSelectedSquare();
     }
 
     handleSelectedSquare() {
@@ -34,7 +33,7 @@ class MoveHandler {
     }
 
     hasSelectedPiece() {
-        return this.selectedPiece !== null;
+        return this.selectedPiece !== null && this.selectedPiece.team == CURRENT_TURN.team;
     }
 
     _isChangingSelectedPiece() {
@@ -45,6 +44,7 @@ class MoveHandler {
     _movePieceTo(piece, targetSquare) {
         piece.moveTo(targetSquare);
         this.selectedPiece = null;
+        CURRENT_TURN.next();
     }
 
     onReleased() {
