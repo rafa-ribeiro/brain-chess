@@ -15,7 +15,7 @@ class MoveHandler {
 
     handleSelectedSquare() {
         let targetSquare = this.getTargetSquare();
-        if (targetSquare) {
+        if (targetSquare && this.hasSelectedPiece()) {
             targetSquare.setSelect(true);
         }
     }
@@ -43,6 +43,7 @@ class MoveHandler {
 
     _movePieceTo(piece, targetSquare) {
         piece.moveTo(targetSquare);
+        targetSquare.setSelect(true);
         this.selectedPiece = null;
         CURRENT_TURN.next();
     }
