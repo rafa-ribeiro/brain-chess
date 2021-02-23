@@ -2,7 +2,8 @@
   margin: 0;
   width: 100%;
   height: 100vh;
-  /* background: linear-gradient(-45deg, #ff1c1c, #ff5656); */
+  background-color: #85ffbd;
+  background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
@@ -11,11 +12,11 @@
 }
 
 .p5Canvas {
-    box-shadow: 3px 4px 4px rgb(0 0 0 / 50%);
-    display: grid;
-    list-style: none;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 0;
-    background-color: rgb(76, 95, 58);
+  box-shadow: 3px 4px 4px rgb(0 0 0 / 50%);
+  display: grid;
+  list-style: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 0;
+  background-color: rgb(76, 95, 58);
 }

@@ -5,6 +5,7 @@ Olá, seja muito bem vindo ao Brain Chess (quebrei meu brain pra pensar num nome
 
 Jogue [aqui](https://rafa-ribeiro.github.io/brain-chess/) e veja como está ficando.
 
+
 ### Motivação
 
 A motivação do Brain Chess é estudar programação de uma forma geral, então pensando nisso, peguei dois temas que gosto muito que é Xadrez e desenvolvimento de games, porque não há
