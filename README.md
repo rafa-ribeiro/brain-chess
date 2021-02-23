@@ -3,7 +3,7 @@
 Olá, seja muito bem vindo ao Brain Chess (quebrei meu brain pra pensar num nome melhor e ficou esse mesmo por ora).
 
 
-Jogue aqui[https://rafa-ribeiro.github.io/brain-chess/] e veja como está ficando.
+Jogue [aqui](https://rafa-ribeiro.github.io/brain-chess/) e veja como está ficando.
 
 ### Motivação
 
