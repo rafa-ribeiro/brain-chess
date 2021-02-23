@@ -1,4 +1,3 @@
-
 class Piece {
 
     constructor(name, imgPiece, square, team) {

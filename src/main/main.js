@@ -1,5 +1,4 @@
 // Global variables
-
 var objLayer;
 var player;
 
@@ -8,17 +7,11 @@ var game;
 var WIDTH = 600;
 var HEIGHT = 600;
 
-
 function setup() {
     var canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent("gameArea");
 
-    // objLayer = new ObjectLayer();
-    // player = new Player(objLayer, "MoveState");
-
     game = new Game(WIDTH, HEIGHT);
-
-    // blackQueen = new Piece('Black Queen', blackQueenImg);
 }
 
 function draw() {

@@ -1,5 +1,3 @@
-// import Chessboard from './chess/chessboard';
-
 class Game {
 
     constructor(width, height) {

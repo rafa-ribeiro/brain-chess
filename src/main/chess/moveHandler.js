@@ -1,5 +1,3 @@
-
-
 class MoveHandler {
 
     constructor(chessboard, pieces) {

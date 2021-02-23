@@ -20,4 +20,3 @@ function nextTurn() {
     idxTurn = (idxTurn + 1) % TURNS.length;
     CURRENT_TURN = TURNS[idxTurn];
 }
-
