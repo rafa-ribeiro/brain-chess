@@ -1,8 +1,9 @@
 class MoveHandler {
 
-    constructor(chessboard, pieces) {
+    constructor(chessboard, pieces, chessEngine) {
         this.chessboard = chessboard;
         this.pieces = pieces;
+        this.chessEngine = chessEngine;
         this.selectedPiece = null;
     }
 
@@ -26,7 +27,7 @@ class MoveHandler {
                 this._unmarkSquare(this.selectedPiece.square);
                 this._setSelectedPiece();
             } else {
-                this._releaseSelectedPiece();
+                this._handlePieceMove();
             }
         }
     }
@@ -67,13 +68,15 @@ class MoveHandler {
     }
 
     onReleased() {
-        this._releaseSelectedPiece();
+        this._handlePieceMove();
     }
 
-    _releaseSelectedPiece() {
-        let targetSquare = this.getTargetSquare();
-
+    _handlePieceMove() {
         if (this.hasValidPiece()) {
+            let targetSquare = this.getTargetSquare();
+            let squaresOptions = this.chessEngine.legalMoves(this.selectedPiece);
+            targetSquare = squaresOptions[targetSquare.name];
+
             if (targetSquare) {
                 if (targetSquare.piece) {
                     this.selectedPiece.resetPosition();

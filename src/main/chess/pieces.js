@@ -18,6 +18,7 @@ class Piece {
 
         this.team = team;
         this.square.piece = this;
+        this.jumpOver = false;
     }
 
     draw() {
@@ -64,6 +65,11 @@ class Piece {
         this.posY = this.square.y;
 
         this.square.piece = this;
+        this.posMoveTo();
+    }
+
+    posMoveTo() {
+
     }
 
     clearSquare() {
@@ -74,4 +80,12 @@ class Piece {
         this.posX = this.initialPosX;
         this.posY = this.initialPosY;
     }
+
+    isJumpOverPiece() {
+        return this.jumpOver;
+    }
+
+    // isPawn() {
+    //     return (this.pieceType && this.pieceType.type == PIECE_TYPE.PAWN) ? true : false;
+    // }
 }

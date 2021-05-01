@@ -21,6 +21,15 @@ PIECES_BLACK_ORIENTATION = [
 ];
 
 var boardTemplate = GAME_ORIENTATION == teams.WHITE ? PIECES_WHITE_ORIENTATION : PIECES_BLACK_ORIENTATION;
+
+const PIECE_TYPE = Object.freeze({
+    PAWN: {Piece: Pawn},
+});
+
+const piecesTypeById = {
+    'P': PIECE_TYPE.PAWN,
+}
+
 class BoardMounter {
 
     static mount(chessboard) {
@@ -35,8 +44,7 @@ class BoardMounter {
                 let pieceImg = PIECES_IMG[pieceId];
                 if (pieceImg) {
                     let team = _getTeam(pieceId);
-
-                    let piece = new Piece(pieceId, pieceImg, square, team);
+                    let piece = createPiece(pieceId, pieceImg, square, team);
                     pieces.push(piece);
                 }
             });
@@ -47,4 +55,21 @@ class BoardMounter {
 
 function _getTeam(pieceId) {
     return pieceId[0] == 'w' ? teams.WHITE : teams.BLACK;
+}
+
+function createPiece(pieceId, pieceImg, square, team) {
+    let pieceType = _getPieceType(pieceId);
+    if (pieceType) {
+        return new pieceType.Piece(pieceId, pieceImg, square, team);
+    }
+    return new Piece(pieceId, pieceImg, square, team);
+}
+
+function _getPieceType(pieceId) {
+    let pieceTypeId = pieceId[1];
+    let pieceType = piecesTypeById[pieceTypeId];
+    if (pieceType) {
+        return pieceType;
+    }
+    return null;
 }

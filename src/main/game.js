@@ -6,7 +6,8 @@ class Game {
 
         this.chessboard = new Chessboard();
         this.playablePieces = BoardMounter.mount(this.chessboard);
-        this.moveHandler = new MoveHandler(this.chessboard, this.playablePieces);
+        this.chessEngine = new ChessEngine(this.chessboard);
+        this.moveHandler = new MoveHandler(this.chessboard, this.playablePieces, this.chessEngine);
     }
 
     setup() {

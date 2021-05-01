@@ -118,4 +118,8 @@ class Square {
         return mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
     }
 
+    isFree() {
+        return this.piece == null;
+    }
+
 }
