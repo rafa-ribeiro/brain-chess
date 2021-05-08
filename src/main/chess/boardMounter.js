@@ -26,12 +26,14 @@ const PIECE_TYPE = Object.freeze({
     PAWN: {Piece: Pawn},
     ROOK: {Piece: Rook},
     KNIGHT: {Piece: Knight},
+    BISHOP: {Piece: Bishop},
 });
 
 const piecesTypeById = {
     'P': PIECE_TYPE.PAWN,
     'R': PIECE_TYPE.ROOK,
     'N': PIECE_TYPE.KNIGHT,
+    'B': PIECE_TYPE.BISHOP,
 }
 
 class BoardMounter {
