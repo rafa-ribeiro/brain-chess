@@ -12,7 +12,11 @@ class ChessEngine {
         if (piece) {
             targetSquares = this._getPieceMoves(piece);
             targetSquares = this._removeOccupiedSquares(targetSquares);
+            if (!piece.isJumpOverPiece()) {
+                targetSquares = this._removeUnreachableSquares(piece, targetSquares);
+            }
 
+            console.log("targetSquares");
             console.log(targetSquares);
         }
         return targetSquares;
@@ -30,18 +34,43 @@ class ChessEngine {
 
     _getPieceMoves(piece) {
         let targetSquares = {};
-        let sourceSquare = piece.square;
         let possibleMoves = piece.moves();
 
         possibleMoves.forEach(possibleMove => {
-
-            let newRowIdx = sourceSquare.rowIndex + possibleMove;
-            let optionSquare = this.chessboard.squares[newRowIdx][sourceSquare.columnIndex];
-
+            let optionSquare = this.chessboard.squares[possibleMove.row][possibleMove.col];
             targetSquares[optionSquare.name] = optionSquare;
         });
 
         return targetSquares;
+    }
+
+    _removeUnreachableSquares(piece, targetSquares) {
+        let reachableSquares = [];
+
+    
+        Object.values(targetSquares).forEach(square => {
+
+            let hasPath = this._hasPath(piece, square);
+            if (hasPath) {
+                reachableSquares[square.name] = square;
+                console.log("Tem caminho de " + piece.square.name + " até " + square.name);
+            }
+        });
+
+        return reachableSquares;
+    }
+
+    _hasPath(piece, targetSquare) {
+        let path = piece.getPathTo(targetSquare);
+
+        let squaresPath = [];
+        path.forEach(step => {
+            let stepSquare = this.chessboard.squares[step.row][step.col];
+            squaresPath.push(stepSquare);
+        });
+
+        let hasPath = squaresPath.every(square => square.isFree());
+        return hasPath;
     }
 
 }

@@ -32,9 +32,7 @@ class Game {
     }
 
     onPressed() {
-        let isOverChessboard = mouseX > 0 && mouseX < this.width && mouseY > 0 && mouseY < this.height;
-
-        if (isOverChessboard) {
+        if (this.isOverChessboard()) {
             this.playablePieces.forEach(piece => {
                 piece.onPressed();
             });
@@ -42,7 +40,10 @@ class Game {
             this.moveHandler.onPressed();
             this.putPieceOnTop(this.moveHandler.selectedPiece);
         }
+    }
 
+    isOverChessboard() {
+        return mouseX > 0 && mouseX < this.width && mouseY > 0 && mouseY < this.height;
     }
 
     onDragged() {
@@ -52,11 +53,13 @@ class Game {
     }
 
     onReleased() {
-        this.playablePieces.forEach(piece => {
-            piece.onReleased();
-        });
-
-        this.moveHandler.onReleased();
+        if (this.isOverChessboard()) {
+            this.playablePieces.forEach(piece => {
+                piece.onReleased();
+            });
+    
+            this.moveHandler.onReleased();
+        }
     }
 
     putPieceOnTop(piece) {

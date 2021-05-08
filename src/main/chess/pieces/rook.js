@@ -1,22 +1,31 @@
-class Pawn extends Piece {
+class Rook extends Piece {
 
     constructor(name, imgPiece, square, team) {
         super(name, imgPiece, square, team);
-        this.hasMoved = false;
-        this.type = PIECE_TYPE.PAWN;
     }
 
     moves() {
         let currRow = this.square.rowIndex;
         let currCol = this.square.columnIndex;
-        let direction = this._getDirection();
 
         let steps = [];
-        let step = {'row': currRow + 1 * direction, 'col': currCol};
-        steps.push(step);
+        for (let col = 0; col < currCol; col++) {
+            let step = {'row': currRow, 'col': col};
+            steps.push(step);
+        }
 
-        if (!this.hasMoved) {
-            step = {'row': currRow + 2 * direction, 'col': currCol};
+        for (let col = currCol + 1; col < 8; col++) {
+            let step = {'row': currRow, 'col': col};
+            steps.push(step);
+        }
+
+        for (let row = 0; row < currRow; row++) {
+            let step = {'row': row, 'col': currCol};
+            steps.push(step);
+        }
+
+        for (let row = currRow + 1; row < 8; row++) {
+            let step = {'row': row, 'col': currCol};
             steps.push(step);
         }
 
@@ -28,10 +37,6 @@ class Pawn extends Piece {
         return GAME_ORIENTATION == this.team ? -1 : 1;
     }
 
-    posMoveTo() {
-        this.hasMoved = true;
-    }
-
     atacks() {
         
     }
@@ -41,12 +46,21 @@ class Pawn extends Piece {
         let sourceRow = this.square.rowIndex;
         let sourceCol = this.square.columnIndex;
         let targetRow = targetSquare.rowIndex;
+        let targetCol = targetSquare.columnIndex;
 
         let minRowIdx = min(sourceRow, targetRow);
         let maxRowIdx = max(sourceRow, targetRow);
 
         for (let i = minRowIdx; i <= maxRowIdx; i++) {
             let step = {'row': i, 'col': sourceCol};
+            path.push(step);
+        }
+
+        let minColIdx = min(sourceCol, targetCol);
+        let maxColIdx = max(sourceCol, targetCol);
+
+        for (let i = minColIdx; i <= maxColIdx; i++) {
+            let step = {'row': sourceRow, 'col': i};
             path.push(step);
         }
 

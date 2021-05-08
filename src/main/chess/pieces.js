@@ -85,6 +85,10 @@ class Piece {
         return this.jumpOver;
     }
 
+    moves() {
+        return [];
+    }
+
     // isPawn() {
     //     return (this.pieceType && this.pieceType.type == PIECE_TYPE.PAWN) ? true : false;
     // }

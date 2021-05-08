@@ -24,10 +24,12 @@ var boardTemplate = GAME_ORIENTATION == teams.WHITE ? PIECES_WHITE_ORIENTATION :
 
 const PIECE_TYPE = Object.freeze({
     PAWN: {Piece: Pawn},
+    ROOK: {Piece: Rook},
 });
 
 const piecesTypeById = {
     'P': PIECE_TYPE.PAWN,
+    'R': PIECE_TYPE.ROOK,
 }
 
 class BoardMounter {
