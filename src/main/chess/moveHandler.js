@@ -25,6 +25,7 @@ class MoveHandler {
         } else {
             if (this._isChangingSelectedPiece()) {
                 this._unmarkSquare(this.selectedPiece.square);
+                this._unsetCandidatesTargets(this.chessboard.squaresList);
                 this._setSelectedPiece();
             } else {
                 this._handlePieceMove();
@@ -75,6 +76,7 @@ class MoveHandler {
         if (this.hasValidPiece()) {
             let targetSquare = this.getTargetSquare();
             let squaresOptions = this.chessEngine.legalMoves(this.selectedPiece);
+            this._setCandidatesTargets(squaresOptions);
             targetSquare = squaresOptions[targetSquare.name];
 
             if (targetSquare) {
@@ -82,6 +84,7 @@ class MoveHandler {
                     this.selectedPiece.resetPosition();
                 } else {
                     this._movePieceTo(this.selectedPiece, targetSquare);
+                    this._unsetCandidatesTargets(Object.values(squaresOptions));
                 }
             } else {
                 this.selectedPiece.resetPosition();
@@ -89,6 +92,14 @@ class MoveHandler {
         } else if (this.selectedPiece) {
             this.selectedPiece.resetPosition();
         }
+    }
+
+    _setCandidatesTargets(targetSquares) {
+        Object.values(targetSquares).forEach(square => square.setCandidateTarget(true));
+    }
+
+    _unsetCandidatesTargets(targetSquares) {
+        targetSquares.forEach(square => square.setCandidateTarget(false));
     }
 
     _setSelectedPiece() {

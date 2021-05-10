@@ -86,6 +86,7 @@ class Square {
         
         this.piece = null;
         this.isSelected = false;
+        this.isCandidateTarget = false;
     }
 
     draw() {
@@ -101,6 +102,8 @@ class Square {
 
         if (this.isSelected) {
             this.activate();
+        } else if (this.isCandidateTarget) {
+            this.activateCandidate();
         }
     }
 
@@ -114,12 +117,22 @@ class Square {
         square(this.x, this.y, this.dimension);
     }
 
+    activateCandidate() {
+        noStroke();
+        fill(100, 150, 200, 127);
+        square(this.x, this.y, this.dimension);
+    }
+
     isOverSquare() {
         return mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
     }
 
     isFree() {
         return this.piece == null;
+    }
+
+    setCandidateTarget(isCandidate) {
+        this.isCandidateTarget = isCandidate;
     }
 
 }

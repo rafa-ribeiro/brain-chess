@@ -26,7 +26,7 @@ class Knight extends Piece {
         changeCol = currCol - 2;
         changeRow = currRow + 1;
         moves.push({'row': changeRow, 'col': changeCol});
-        changeCol = currCol - 1;
+        changeRow = currRow - 1;
         moves.push({'row': changeRow, 'col': changeCol});
 
         changeRow = currRow - 2;
