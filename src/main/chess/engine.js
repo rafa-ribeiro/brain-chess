@@ -47,7 +47,6 @@ class ChessEngine {
     _removeUnreachableSquares(piece, targetSquares) {
         let reachableSquares = [];
 
-    
         Object.values(targetSquares).forEach(square => {
 
             let hasPath = this._hasPath(piece, square);

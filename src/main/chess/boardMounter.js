@@ -27,6 +27,8 @@ const PIECE_TYPE = Object.freeze({
     ROOK: {Piece: Rook},
     KNIGHT: {Piece: Knight},
     BISHOP: {Piece: Bishop},
+    KING: {Piece: King},
+    QUEEN: {Piece: Queen},
 });
 
 const piecesTypeById = {
@@ -34,6 +36,8 @@ const piecesTypeById = {
     'R': PIECE_TYPE.ROOK,
     'N': PIECE_TYPE.KNIGHT,
     'B': PIECE_TYPE.BISHOP,
+    'K': PIECE_TYPE.KING,
+    'Q': PIECE_TYPE.QUEEN,
 }
 
 class BoardMounter {

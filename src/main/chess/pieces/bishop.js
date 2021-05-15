@@ -55,15 +55,21 @@ class Bishop extends Piece {
         let rowPath = this.range(sourceRow, targetRow);
         let colPath = this.range(sourceCol, targetCol);
 
-        for (let i = 0; i < rowPath.length; i++) {
-            let row = rowPath[i];
-            let col = colPath[i];
-            let step = {'row': row, 'col': col};
-            path.push(step);
-        }
+        let rowDistance = Math.abs(sourceRow - targetRow);
+        let colDistance = Math.abs(sourceCol - targetCol);
 
-        let filterPath = path.filter(step => step.row != sourceRow || step.col != sourceCol);
-        return filterPath;
+        let isDiagonal = rowDistance == colDistance;
+
+        if (isDiagonal) {
+            for (let i = 0; i < rowPath.length; i++) {
+                let row = rowPath[i];
+                let col = colPath[i];
+                let step = {'row': row, 'col': col};
+                path.push(step);
+            }
+            path = path.filter(step => step.row != sourceRow || step.col != sourceCol);
+        }
+        return path;
     }
 
     range(start, end) {

@@ -33,6 +33,10 @@ class Rook extends Piece {
         return steps;
     }
 
+    posMoveTo() {
+        this.hasMoved = true;
+    }
+
     _getDirection() {
         return GAME_ORIENTATION == this.team ? -1 : 1;
     }
@@ -51,21 +55,26 @@ class Rook extends Piece {
         let minRowIdx = min(sourceRow, targetRow);
         let maxRowIdx = max(sourceRow, targetRow);
 
-        for (let i = minRowIdx; i <= maxRowIdx; i++) {
-            let step = {'row': i, 'col': sourceCol};
-            path.push(step);
+        let isSameCol = sourceCol == targetCol;
+        let isSameRow = sourceRow == targetRow;
+
+        if (isSameRow || isSameCol) {
+            for (let i = minRowIdx; i <= maxRowIdx; i++) {
+                let step = {'row': i, 'col': sourceCol};
+                path.push(step);
+            }
+    
+            let minColIdx = min(sourceCol, targetCol);
+            let maxColIdx = max(sourceCol, targetCol);
+    
+            for (let i = minColIdx; i <= maxColIdx; i++) {
+                let step = {'row': sourceRow, 'col': i};
+                path.push(step);
+            }
+
+            path = path.filter(step => step.row != sourceRow || step.col != sourceCol);
         }
-
-        let minColIdx = min(sourceCol, targetCol);
-        let maxColIdx = max(sourceCol, targetCol);
-
-        for (let i = minColIdx; i <= maxColIdx; i++) {
-            let step = {'row': sourceRow, 'col': i};
-            path.push(step);
-        }
-
-        let filterPath = path.filter(step => step.row != sourceRow || step.col != sourceCol);
-        return filterPath;
+        return path;
     }
 
 }
