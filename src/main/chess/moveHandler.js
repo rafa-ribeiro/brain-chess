@@ -39,15 +39,29 @@ class MoveHandler {
 
     _isChangingSelectedPiece() {
         let targetSquare = this.getTargetSquare();
-        return this.selectedPiece != null && targetSquare.piece != null;
+        return this.selectedPiece != null && targetSquare.piece != null && this.selectedPiece.team == targetSquare.piece.team;
     }
 
     _movePieceTo(piece, targetSquare) {
         let sourceSquare = piece.square;
+        
+        this._capturePieceIfIsPossible(piece, targetSquare);
         piece.moveTo(targetSquare);
         this._markLastMove(sourceSquare, targetSquare);
         this.selectedPiece = null;
         CURRENT_TURN.next();
+    }
+
+    _capturePieceIfIsPossible(attackingPiece, targetSquare) {
+        let capturedPiece = targetSquare.piece;
+        if (capturedPiece && attackingPiece.team != capturedPiece.team) {
+            this._removePieceFromGame(capturedPiece);
+        }
+    }
+
+    _removePieceFromGame(piece) {
+        let pieceIdx = this.pieces.indexOf(piece);
+        this.pieces.splice(pieceIdx, 1);
     }
 
     _markLastMove(sourceSquare, targetSquare) {
@@ -80,7 +94,7 @@ class MoveHandler {
             targetSquare = squaresOptions[targetSquare.name];
 
             if (targetSquare) {
-                if (targetSquare.piece) {
+                if (targetSquare.piece && targetSquare.piece.team == this.selectedPiece.team) {
                     this.selectedPiece.resetPosition();
                 } else {
                     this._movePieceTo(this.selectedPiece, targetSquare);

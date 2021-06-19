@@ -29,7 +29,6 @@ class Rook extends Piece {
             steps.push(step);
         }
 
-        // console.log(steps);
         return steps;
     }
 
@@ -39,10 +38,6 @@ class Rook extends Piece {
 
     _getDirection() {
         return GAME_ORIENTATION == this.team ? -1 : 1;
-    }
-
-    atacks() {
-        
     }
 
     getPathTo(targetSquare) {

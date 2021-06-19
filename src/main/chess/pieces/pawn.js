@@ -32,8 +32,16 @@ class Pawn extends Piece {
         this.hasMoved = true;
     }
 
-    atacks() {
-        
+    attacks() {
+        let currRow = this.square.rowIndex;
+        let currCol = this.square.columnIndex;
+        let direction = this._getDirection();
+
+        let steps = [];
+        steps.push({'row': currRow + 1 * direction, 'col': currCol - 1});
+        steps.push({'row': currRow + 1 * direction, 'col': currCol + 1});
+        steps = steps.filter(move => move.row >= 0 && move.row < 8 && move.col >= 0 && move.col < 8);
+        return steps;
     }
 
     getPathTo(targetSquare) {
@@ -52,6 +60,22 @@ class Pawn extends Piece {
 
         let filterPath = path.filter(step => step.row != sourceRow || step.col != sourceCol);
         return filterPath;
+    }
+
+    getPathToAttack(targetSquare) {
+        let path = []
+        let sourceRow = this.square.rowIndex;
+        let sourceCol = this.square.columnIndex;
+        let targetRow = targetSquare.rowIndex;
+        let targetCol = targetSquare.columnIndex;
+        let deltaRow = targetRow - sourceRow;
+        let deltaCol = targetCol - sourceCol;
+        
+        if (deltaCol == 1 && deltaRow == 1) {
+            path.push({'row': targetRow, 'col': targetCol});
+        }
+
+        return path;
     }
 
 }

@@ -36,10 +36,6 @@ class King extends Piece {
         this.hasMoved = true;
     }
 
-    atacks() {
-        
-    }
-
     getPathTo(targetSquare) {
         let path = []
         let sourceRow = this.square.rowIndex;

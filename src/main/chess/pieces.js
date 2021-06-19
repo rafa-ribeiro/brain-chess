@@ -89,7 +89,16 @@ class Piece {
         return [];
     }
 
-    // isPawn() {
-    //     return (this.pieceType && this.pieceType.type == PIECE_TYPE.PAWN) ? true : false;
-    // }
+    attacks() {
+        return this.moves();
+    }
+
+    getPathTo(targetSquare) {
+        
+    }
+
+    getPathToAttack(targetSquare) {
+        return this.getPathTo(targetSquare);
+    }
+
 }

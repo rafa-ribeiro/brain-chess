@@ -40,8 +40,4 @@ class Knight extends Piece {
         return moves;
     }
 
-    atacks() {
-        
-    }
-
 }

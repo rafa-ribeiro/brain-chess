@@ -17,10 +17,6 @@ class Queen extends Piece {
         return moves;
     }
 
-    atacks() {
-        
-    }
-
     getPathTo(targetSquare) {
         let path = [];
         
